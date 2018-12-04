@@ -11,7 +11,7 @@ sensor.set_filter(bme680.FILTER_SIZE_3)
 
 while True:
     if sensor.get_sensor_data():
-        output = "{0:.2f} C,{1:.2f} %RH".format(sensor.data.temperature, sensor.data.pressure, sensor.data.humidity)
+        output = "{0:.2f} C,{1:.2f},{2:.2f} %RH".format(sensor.data.temperature, sensor.data.pressure, sensor.data.humidity)
         print(output)
 
     time.sleep(1)
