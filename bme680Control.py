@@ -5,7 +5,7 @@ from datetime import datetime
 
 sensor = bme680.BME680()
 
-path = "/media/pi/D220-8D3B1/data_log_2.csv"
+path = "/media/pi/D220-8D3B1/data_log_usb.csv"
 file = open(path,"a+")
 i=0
 
