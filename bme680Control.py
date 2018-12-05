@@ -5,7 +5,7 @@ from datetime import datetime
 
 sensor = bme680.BME680()
 
-path = "/home/pi/SIOT/data_log_2.csv"
+path = "/media/pi/D220-8D3B1/data_log_2.csv"
 file = open(path,"a+")
 i=0
 
@@ -19,7 +19,7 @@ while True:
     if sensor.get_sensor_data():	
         output = "{0:.2f} C,{1:.2f} hPA,{2:.2f} %RH".format(sensor.data.temperature, sensor.data.pressure, sensor.data.humidity)
 	
-        if os.stat("/home/pi/SIOT/data_log_2.csv").st_size == 0:
+        if os.stat(path).st_size == 0:
             file.write("datetime,temperature,pressure,humidity\n")
 
         now = datetime.now()
