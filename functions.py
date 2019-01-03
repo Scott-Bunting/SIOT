@@ -1,9 +1,14 @@
+from datetime import datetime
+import requests
+import time
+import json
+
 def get_weather(api_key, lat, lon):
     url = "https://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&units=metric&appid={}".format(lat, lon, api_key)
     r = requests.get(url)
     return r.text
 
-def data_inside():
+def data_inside(sensor):
     temp_in = sensor.data.temperature
     press_in = sensor.data.pressure
     hum_in = sensor.data.humidity

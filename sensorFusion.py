@@ -6,23 +6,30 @@ import time
 import os
 from datetime import datetime
 import bme680
-from functions import all
+from functions import *
 
 #create or open csv file
 path = "/media/pi/D220-8D3B1/SIOT/data-storage/usb/data_log_combined.csv"
 file = open(path, "a+")
 
-#API requirements
+#Api requirements
 api_key = '07bafc834660819c6b0c515fe2a9cac9'
 
-#house coordinates
+#House Coordinates
 lat_yel = 51.49
 lon_yel = -0.22
 
-#heat loss coefficient
+#Heat loss coefficient
 u = 127
 
-#instantiate sensor
+#Price per kwh
+p = 2.78
+
+#Sampling frequencies
+interval_in = 15 #home.gov states a fire can spread in 30 seconds
+interval_out = 600 #recommended samplig rate from OWM
+
+#Instantiate sensor
 sensor = bme680.BME680()
 sensor.set_humidity_oversample(bme680.OS_2X)
 sensor.set_pressure_oversample(bme680.OS_4X)
@@ -33,15 +40,18 @@ sensor.set_filter(bme680.FILTER_SIZE_3)
 inside_headers = ['time', 'temp_in', 'press_in', 'hum_in']
 outside_headers = ['time_measured', 'temp_out', 'press_out', 'hum_out']
 comparison_headers = ['time_diff', 'temp_diff', 'press_diff', 'hum_diff']
-metrics_headers = ['power','cost']
+metrics_headers = ['power','cost_window','cost_predict']
 
-headers = ','.join(inside_headers) + ','.join(outside_headers) + ','.join(comparison_headers) \
-          + ','.join(metrics_headers)
+headers = ','.join(inside_headers) + ',' + ','.join(outside_headers) + ',' + \
+	 ','.join(comparison_headers) + ','  + ','.join(metrics_headers)
 
 if os.stat(path).st_size == 0:
     file.write(headers + "\n")
     new = True
+elif os.stat(path).st_size == 1:
+    new = True
 else:
+    print(os.stat(path).st_size)
     new = False
 
 start = time.time()
@@ -53,33 +63,53 @@ while True:
     end = time.time()
     try:
         if sensor.get_sensor_data():
-            data_in = data_inside()
+            data_in = data_inside(sensor)
         else:
             data_in = [0, 0, 0, 0]
+        print(data_in)
 
-        if end - start > 600 or count == 0:
+        if end - start > interval_out or count == 0:
             data_out = data_outside(api_key, lat_yel, lon_yel)
             start = time.time()
+        print(data_out)
+        
+        data_comp = []
+	time_out = datetime.strptime(data_out[0], '%Y/%m/%d %H:%M:%S')
+	time_in = datetime.strptime(data_in[0], '%Y/%m/%d %H:%M:%S')
+	time_diff = time_in - time_out
+	data_comp.append(time_diff)
 
-        data_comp = data_in - data_out
+        if len(data_out) == len(data_in):
+            for i in range(len(data_in)-1):
+                comp = data_in[i+1] - data_out[i+1]
+                data_comp.append(comp)
 
         toc = time.time() #in case api takes too long to call
         if new:
             power = data_comp[1]*u
             cost = 0
+	    cost_hour = 0
+	    new = False
         else:
             delta_power = power - data_comp[1]*u
-            cost = delta_power*(toc-tic)
+	    power = data_comp[1]*u
+	    power_window = power + delta_power/2
+            cost = p*power_window*((toc-tic)/3660)/1000
+	    cost = round(cost, 3)
+	    cost_hour = p*power_window/1000
+	    print(cost_hour)
+	    cost_hour = round(cost_hour, 2)
 
-        metrics = [power, cost]
+        metrics = [power, cost, cost_hour]
 
-        output = ','.join(str(x) for x in list_of_ints) + ','.join(str(x) for x in data_out) \
-                 + ','.join(str(x) for x in data_comp) + ','.join(str(x) for x in metrics)
+        output = ','.join(str(x) for x in data_in) + ',' + ','.join(str(x) for x in data_out) \
+                 + ',' + ','.join(str(x) for x in data_comp) + ',' +  ','.join(str(x) for x in metrics)
 
         file.write(output + "\n")
+	print(output)
         tic = time.time()
         file.flush()
-        time.sleep(60)
+        time.sleep(interval_in)
 
     except KeyboardInterrupt:
         file.close()
