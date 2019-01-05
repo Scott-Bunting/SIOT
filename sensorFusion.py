@@ -51,7 +51,6 @@ if os.stat(path).st_size == 0:
 elif os.stat(path).st_size == 1:
     new = True
 else:
-    print(os.stat(path).st_size)
     new = False
 
 start = time.time()
@@ -64,23 +63,23 @@ while True:
     try:
         if sensor.get_sensor_data():
             data_in = data_inside(sensor)
-        else:
-            data_in = [0, 0, 0, 0]
+	else:
+	    print('Sensor Failed')
+	print('Data Inside:')
         print(data_in)
-	print('[DEBUG]: before API')
         if end - start > interval_out or count == 0:
-	    print('[DEBUG]: API')
 	    code = get_code(api_key, lat_yel, lon_yel)
 	    count += 1
-	    print('API Request:')
-	    print(code)
 	    if code == 200:
+		print('API Request Successful: {}'.format(code))
 		data_out = data_outside(api_key, lat_yel, lon_yel)
+		print('Data Outside')
 		print(data_out)
                 start = time.time()
 	    else:
-		print(code)
-        print(data_out)
+		print('API Request Unsuccessful: {}'.format(code))
+		print('Data Outside')
+        	print(data_out)
         
         data_comp = []
 	time_out = datetime.strptime(data_out[0], '%Y/%m/%d %H:%M:%S')
@@ -106,7 +105,8 @@ while True:
             cost = p*power_window*((toc-tic)/3660)/1000
 	    cost = round(cost, 3)
 	    cost_hour = p*power_window/1000
-	    print(cost_hour)
+	    print('Hourly cost: {}p.'.format(cost_hour))
+	    print('Power: {}W'.format(power))
 	    cost_hour = round(cost_hour, 2)
 
         metrics = [power, cost, cost_hour]
@@ -115,11 +115,11 @@ while True:
                  + ',' + ','.join(str(x) for x in data_comp) + ',' +  ','.join(str(x) for x in metrics)
 
         file.write(output + "\n")
-	print(output)
         tic = time.time()
         file.flush()
         time.sleep(interval_in)
 
     except KeyboardInterrupt:
         file.close()
+	break
 
