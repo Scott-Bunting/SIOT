@@ -58,6 +58,7 @@ def get_data_out():
     global lat_yel
     global lon_yel
     
+    code == get_code(api_key, lat_yel, lon_yel)
     try:
         data_out = data_outside(api_key, lat_yel, lon_yel)
         return jsonify(datetime = data_out[0],
@@ -66,7 +67,7 @@ def get_data_out():
                         humidity_outside = data_out[3])
 
     except:
-        return jsonify({'error': 'Sensor Failed'}), 503
+        return jsonify({'error': 'OWM API Failed: {}'.format(str(code))}), 503
 
 @app.route('/metrics', methods=['GET'])
 def get_metrics():
@@ -74,41 +75,44 @@ def get_metrics():
     global u
     global p
 
-    outside_r = requests.get(url+'/yeldham_outside')
-    data_out = outside_r.text
-    data_out = json.loads(data_out)
+    try:
+        outside_r = requests.get(url+'/yeldham_outside')
+        data_out = outside_r.text
+        data_out = json.loads(data_out)
     
-    inside_r = requests.get(url+'/yeldham_inside')
-    data_in = inside_r.text
-    data_in = json.loads(data_in)
+        inside_r = requests.get(url+'/yeldham_inside')
+        data_in = inside_r.text
+        data_in = json.loads(data_in)
 
-    delta_temp = float(data_in['temp_inside']) - float(data_out['temp_outside'])
-    power = int(delta_temp*u)
+        delta_temp = float(data_in['temp_inside']) - float(data_out['temp_outside'])
+        power = int(delta_temp*u)
 
-    cost_hour = p*power/1000
-    cost_hour = round(cost_hour, 2)
+        cost_hour = p*power/1000
+        cost_hour = round(cost_hour, 2)
 
-    cost_day = (cost_hour*24)/100 #In Sterling Pounds
-    cost_day = round(cost_day, 2)
+        cost_day = (cost_hour*24)/100 #In Sterling Pounds
+        cost_day = round(cost_day, 2)
     
-    date = data_in['datetime']
-    if int(date[5:6]) == 0:
-        month = int(date[6])
-    else:
-        month = int(date[5:6])
-    year = int(date[0:3])
-    days = monthrange(year, month)
-    days = days[1]
+        date = data_in['datetime']
+        if int(date[5:6]) == 0:
+            month = int(date[6])
+        else:
+            month = int(date[5:6])
+        year = int(date[0:3])
+        days = monthrange(year, month)
+        days = days[1]
 
-    cost_month = cost_day*days 
-    cost_month = round(cost_month, 2)
+        cost_month = cost_day*days 
+        cost_month = round(cost_month, 2)
 
-    return jsonify(power = power,
-                    hourly_cost = cost_hour,
-                    daily_cost = cost_day,
-                    monthly_cost = cost_month,
-                    temp_in = data_in['temp_inside'],
-                    temp_out = data_out['temp_outside'])
+        return jsonify(power = power,
+                        hourly_cost = cost_hour,
+                        daily_cost = cost_day,
+                        monthly_cost = cost_month,
+                        temp_in = data_in['temp_inside'],
+                        temp_out = data_out['temp_outside'])
+    except:
+	return jsonify({'error': 'Request failed'}), 503
     
 
 
