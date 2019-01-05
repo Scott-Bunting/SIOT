@@ -80,7 +80,6 @@ while True:
                 start = time.time()
 	    else:
 		print(code)
-		data_out = ['2019/01/05 12:20:00', 4.09, 1039, 70]
         print(data_out)
         
         data_comp = []
