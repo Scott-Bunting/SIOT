@@ -67,14 +67,20 @@ while True:
         else:
             data_in = [0, 0, 0, 0]
         print(data_in)
-
+	print('[DEBUG]: before API')
         if end - start > interval_out or count == 0:
-	    text, code = data_outside(api_key, lat_yel, lon_yel)
+	    print('[DEBUG]: API')
+	    code = get_code(api_key, lat_yel, lon_yel)
+	    count += 1
+	    print('API Request:')
+	    print(code)
 	    if code == 200:
-		data_out, code = data_outside(api_key, lat_yel, lon_yel)
+		data_out = data_outside(api_key, lat_yel, lon_yel)
+		print(data_out)
                 start = time.time()
 	    else:
 		print(code)
+		data_out = ['2019/01/05 12:20:00', 4.09, 1039, 70]
         print(data_out)
         
         data_comp = []
