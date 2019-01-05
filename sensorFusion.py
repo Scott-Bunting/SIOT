@@ -69,8 +69,12 @@ while True:
         print(data_in)
 
         if end - start > interval_out or count == 0:
-            data_out = data_outside(api_key, lat_yel, lon_yel)
-            start = time.time()
+	    text, code = data_outside(api_key, lat_yel, lon_yel)
+	    if code == 200:
+		data_out, code = data_outside(api_key, lat_yel, lon_yel)
+                start = time.time()
+	    else:
+		print(code)
         print(data_out)
         
         data_comp = []
