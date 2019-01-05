@@ -10,6 +10,6 @@ The data is then used to provide insights on energy consumption and provide aler
 ## References
 
 ['Fire in 30 seconds. Determination of 15 second sampling rate'](https://www.ready.gov/home-fires)
-['Energy saving through 2 degree reduction in household temperature'](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/128720/6923-how-much-energy-could-be-saved-by-making-small-cha.pdf)
-['Heat loss co-efficient of household'](https://www.open.edu/openlearn/nature-environment/the-environment/energy-buildings/content-section-2.4.1)
-['Cost per kWh of Gas. British Gas.'](https://www.ukpower.co.uk/home_energy/tariffs-per-unit-kwh)
+['Energy saving through 2 degree reduction in household temperature'](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/128720/6923-how-much-energy-could-be-saved-by-making-small-cha.pdf)  
+['Heat loss co-efficient of household'](https://www.open.edu/openlearn/nature-environment/the-environment/energy-buildings/content-section-2.4.1)  
+['Cost per kWh of Gas. British Gas.'](https://www.ukpower.co.uk/home_energy/tariffs-per-unit-kwh)  
