@@ -16,9 +16,9 @@ def get_code(api_key, lat, lon):
     return code
 
 def data_inside(sensor):
-    temp_in = sensor.data.temperature
-    press_in = sensor.data.pressure
-    hum_in = sensor.data.humidity
+    temp_in =round(sensor.data.temperature, 1)
+    press_in = int(sensor.data.pressure)
+    hum_in = int(sensor.data.humidity)
     now = datetime.now()
     now = now.strftime('%Y/%m/%d %H:%M:%S')
 
@@ -28,6 +28,7 @@ def data_outside(api_key, lat, lon):
     url = "https://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&units=metric&appid={}".format(lat, lon,
                                                                                                        api_key)
     r = requests.get(url)
+    code = r.status_code
     data_json = r.text
     data = json.loads(data_json)
     general = data['main']
@@ -36,4 +37,4 @@ def data_outside(api_key, lat, lon):
     hum_out = general['humidity']
     rec = datetime.utcfromtimestamp(data['dt']).strftime('%Y/%m/%d %H:%M:%S')
 
-    return [rec, temp_out, press_out, hum_out]
+    return ([rec, temp_out, press_out, hum_out], code)
