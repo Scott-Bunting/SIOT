@@ -68,11 +68,12 @@ while True:
 	print('Data Inside:')
         print(data_in)
         if end - start > interval_out or count == 0:
-	    code = get_code(api_key, lat_yel, lon_yel)
+	    test = data_outside(api_key, lat_yel, lon_yel)
+            code = test[1]
 	    count += 1
 	    if code == 200:
 		print('API Request Successful: {}'.format(code))
-		data_out = data_outside(api_key, lat_yel, lon_yel)
+		data_out = test[0]
 		print('Data Outside')
 		print(data_out)
                 start = time.time()
@@ -99,12 +100,12 @@ while True:
 	    cost_hour = 0
 	    new = False
         else:
-            delta_power = power - data_comp[1]*u
-	    power = data_comp[1]*u
+            delta_power = int(power - data_comp[1]*u)
+	    power = int(data_comp[1]*u)
 	    power_window = power + delta_power/2
             cost = p*power_window*((toc-tic)/3660)/1000
 	    cost = round(cost, 3)
-	    cost_hour = p*power_window/1000
+	    cost_hour = round(p*power_window/1000, 2)
 	    print('Hourly cost: {}p.'.format(cost_hour))
 	    print('Power: {}W'.format(power))
 	    cost_hour = round(cost_hour, 2)
