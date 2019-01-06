@@ -58,9 +58,8 @@ def get_data_out():
     global lat_yel
     global lon_yel
     
-    code == get_code(api_key, lat_yel, lon_yel)
     try:
-        data_out = data_outside(api_key, lat_yel, lon_yel)
+        data_out = data_outside(api_key, lat_yel, lon_yel)[0]
         return jsonify(datetime = data_out[0],
                         temp_outside = data_out[1],
 			press_outside = data_out[2],
