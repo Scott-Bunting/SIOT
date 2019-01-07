@@ -31,10 +31,13 @@ def data_outside(api_key, lat, lon):
     code = r.status_code
     data_json = r.text
     data = json.loads(data_json)
-    general = data['main']
-    temp_out = general['temp']
-    press_out = general['pressure']
-    hum_out = general['humidity']
-    rec = datetime.utcfromtimestamp(data['dt']).strftime('%Y/%m/%d %H:%M:%S')
+    if code == 200:
+        general = data['main']
+        temp_out = general['temp']
+        press_out = general['pressure']
+        hum_out = general['humidity']
+        rec = datetime.utcfromtimestamp(data['dt']).strftime('%Y/%m/%d %H:%M:%S')
 
-    return ([rec, temp_out, press_out, hum_out], code)
+        return ([rec, temp_out, press_out, hum_out], code)
+    else:
+        return ([], code
