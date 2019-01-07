@@ -40,4 +40,4 @@ def data_outside(api_key, lat, lon):
 
         return ([rec, temp_out, press_out, hum_out], code)
     else:
-        return ([], code
+        return ([], code)
