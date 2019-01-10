@@ -132,11 +132,19 @@ def get_dashboard():
 
         return '''
 	<html>
-	<body><h1>Yeldham Road Dashboard: {:.2f}</h1></body>
+	<body><h1>Yeldham Road Dashboard</h1></body>
 	<br>
-	<p>This is a pararaph</p>
+	<p>Predicted monthly cost: £{:.2f} </p>
+	<br>
+	<p>Predicted daily cost: {:.2f}p </p>
+	<br>
+	<p>Current hourly cost: {:.2f}p </p>
+	<br>
+	<p>Power Consumption: {:.2f}W </p>
+	<br>
+	<p>Temperature Inside: {:.2f}&#2103; Temperature Outside: {:.2f}&#2103; </p>
 	</html>
-	'''.format(cost_month)
+	'''.format(cost_month, cost_day, cost_hour, power, temp_in, temp_out)
     except:
 	print "Unexpected error:", sys.exc_info()[0]
 	return jsonify({'error': 'Request failed'}), 503
