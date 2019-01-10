@@ -81,17 +81,17 @@ body {
 	   </div>
 	   <div class="rectangle">
 	   {% if power >= 2000 %}
-		   <p class="middle3"><br/>
-			   Warning!
-		   </p>
-			   <br/>
+		   <p class="middle3">Warning!</p>
 		   <p class="middle4">Your Energy Consumption is currently over 2kW.<br/>
 			   <br/>
 			   This is both bad for the environment and your wallet.<br/>
 			   <br/>
 			   Try turning your heating down and putting on a jumper.
 		   </p>
-	   {% endif %}
+	   {% elseif %}
+		   <p class="middle3">Congratulations!</p>
+		   <p class="middle4">Your Energy Consumption is below 2kW.<br/></p>
+	   {% else %}
 	   </div>
    </body>
 </html>
