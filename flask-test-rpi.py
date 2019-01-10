@@ -134,7 +134,7 @@ def get_dashboard():
 	<html>
 	<body><h1>Yeldham Road Dashboard</h1></body>
 	<br>
-	<h2>How much are you spending&quest;<h2>
+	<h2>How much are you spending&quest;</h2>
 	<p>Predicted monthly cost: &#163;{:.2f} </p>
 	<p>Predicted daily cost: {:.2f}p </p>
 	<p>Current hourly cost: {:.2f}p </p>
