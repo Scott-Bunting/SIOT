@@ -13,12 +13,18 @@ body {
     font-weight: lighter;
     font-size: 150%;
 }
+.middle3{
+    text-align:center;
+    font-family: "Helvetica";
+    font-weight: bold;
+    font-size: 150%;
+}
 .rectangle {
     font-family: "Helvetica";
     font-weight: 300;
     text-align: center;
     display: block;
-    margin: 20px;
+    margin: auto;
     width: 400px;
     border-style: solid;
     border-width: medium;
@@ -69,13 +75,15 @@ body {
 	   </div>
 	   <div class="rectangle">
 	   {% if power >= 2000 %}
-		   <p class="middle3"><font size"=+4" font-weight: bold>Warning!</font><br/> 
+		   <p class="middle3"><br/>
+			   Warning!<br/> 
 			   <br/>
 			   Your Energy Consumption is currently over 2kW.<br/>
 			   <br/>
 			   This is both bad for the environment and your wallet.<br/>
 			   <br/>
 			   Try turning your heating down and putting on a jumper.
+			   <br/>
 		   </p>
 	   {% endif %}
 	   </div>
