@@ -129,6 +129,7 @@ def get_dashboard():
 	cost_month = data_met['monthly_cost']
 	temp_in = data_met['temp_in']
 	temp_out = data_met['temp_out']
+	print('[DEBUG] Data Stored Locally')
 	
 	return render_template('index.html',
 			       temp_out = temp_out,
