@@ -149,7 +149,7 @@ def get_dashboard():
         cost_month = cost_day*days 
         cost_month = round(cost_month, 2)
 
-        return return '<html><body><h1>Yeldham Road Dashboard: {:.2f}</h1></body></html>'.format(cost_day)
+        return '<html><body><h1>Yeldham Road Dashboard: {:.2f}</h1></body></html>'.format(cost_day)
     except:
 	return jsonify({'error': 'Request failed'}), 503
 
