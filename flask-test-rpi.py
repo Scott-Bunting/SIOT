@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, redirect
 from time import sleep 
 from serial import Serial
 from functions import data_inside, data_outside, get_code 
@@ -32,6 +32,9 @@ metrics_headers = ['power', 'cost_window', 'cost_predict']
 
 #Creating AP
 app = Flask(__name__)
+@app.route('/')
+def hello():
+    return redirect("https://9aebf0a8.ngrok.io/dashboard", code=302)
 
 @app.route('/yeldham_inside', methods=['GET'])
 def get_data():

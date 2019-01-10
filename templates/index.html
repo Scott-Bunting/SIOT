@@ -1,11 +1,48 @@
 <!doctype html>
-<head>
-     <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
+<style>
+body {
+    background-color: #E8E8E8;
+}
+.middle{
+    text-align:center;
+    font-family: "Helvetica";
+}
+.middle2{
+    text-align:center;
+    font-family: "Helvetica";
+    font-weight: lighter;
+    font-size: 150%;
+}
+.middle3{
+    text-align:center;
+    font-family: "Helvetica";
+    font-weight: bold;
+    font-size: 200%;
+}
+.middle4{
+    text-align:center;
+    font-family: "Helvetica";
+    font-weight: normal;
+    font-size: 120%;
+}
+.rectangle {
+    font-family: "Helvetica";
+    font-weight: 300;
+    text-align: center;
+    display: block;
+    margin: auto;
+    width: 500px;
+    border-style: solid;
+    border-width: medium;
+    border-color: #D3D3D3;
+    border-radius: 50px;
+    background-color: #F5F5F5;
+}
+</style>
 <html>
    <body>
-      <h1 class="middle">Yeldham Road</h1>
-	    <br>
+	   <div class="ex1">
+     <h1 class="middle">Yeldham Road</h1>
         <p class="middle">
 	    <svg  width="200px" height="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 	    	x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;display:block;margin:auto" xml:space="preserve">
@@ -25,14 +62,34 @@
 	    </g>
 	    </svg>
         </p>
-	    <h2 class="middle">Outside: {{ temp_out }}&deg;C<br>Inside: {{ temp_in }}&deg;C </h2>
-	    <br>
+	   <h2 class="middle">Outside</h2>
+	   <p class="middle2"> {{ temp_out }}&deg;C </p>
+	   <h2 class="middle">Inside</h2>
+	   <p class="middle2"> {{ temp_in }}&deg;C </p>
       <h2 class="middle">How much are you spending&quest;</h2>
-      <p class="middle">Predicted monthly cost: &#163;{{ cost_month }} </p>
-      <p class ="middle">Predicted daily cost: &#163;{{ cost_day }} </p>
-      <p class="middle">Current hourly cost: {{ cost_hour }}p </p>
-      <br>
-      <h3 class="middle">Power Consumption: {{ power }}W </h3>
-      <br>
+	   <p class="middle">Predicted monthly cost</p>
+	   <p class="middle2">&#163;{{ cost_month }}</p>
+	   <p class="middle">Predicted daily cost</p>
+	   <p class="middle2">&#163;{{ cost_day }}</p>
+	   <p class="middle">Current hourly cost</p>
+	   <p class="middle2">{{ cost_hour }}p </p>
+	   </div>
+	   <div>
+	   <h2 class="middle">Power Consumption </h2>
+	   <p class ="middle2">{{ power }}(W)</p>
+	   </div>
+	   <div class="rectangle">
+	   {% if power >= 2000 %}
+		   <p class="middle3">Warning!</p>
+		   <p class="middle4">Your Energy Consumption is currently over 2kW.<br/>
+			   <br/>
+			   This is both bad for the environment and your wallet.<br/>
+			   Try turning your heating down and putting on a jumper.
+		   </p>
+	   {% else %}
+		   <p class="middle3">Congratulations!</p>
+		   <p class="middle4">Your Energy Consumption is below 2kW.<br/><br/></p>
+	   {% endif %}
+	   </div>
    </body>
 </html>
