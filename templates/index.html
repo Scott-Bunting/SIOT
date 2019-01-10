@@ -7,6 +7,12 @@ body {
     text-align:center;
     font-family: "Helvetica";
 }
+.middle2{
+    text-align:center;
+    font-family: "Helvetica";
+    font-weight: lighter;
+    font-size: 150%;
+}
 </style>
 <html>
    <body>
@@ -31,14 +37,19 @@ body {
 	    </g>
 	    </svg>
         </p>
-	    <h2 class="middle">Outside: {{ temp_out }}&deg;C<br>Inside: {{ temp_in }}&deg;C </h2>
-	    <br>
+	   <h2 class="middle">Outside</h2>
+	   <p class="middle2"> {{ temp_out }}&deg;C </p>
+	   <br>
+	   <h2 class="middle">Inside</h2>
+	   <p class="middle2"> {{ temp_in }}&deg;C </p>
+	   <br>
       <h2 class="middle">How much are you spending&quest;</h2>
       <p class="middle">Predicted monthly cost: &#163;{{ cost_month }} </p>
       <p class ="middle">Predicted daily cost: &#163;{{ cost_day }} </p>
       <p class="middle">Current hourly cost: {{ cost_hour }}p </p>
       <br>
-      <h3 class="middle">Power Consumption: {{ power }}W </h3>
+      <h2 class="middle">Power Consumption </h3>
+      <p class ="middle">
       <br>
    </body>
 </html>
