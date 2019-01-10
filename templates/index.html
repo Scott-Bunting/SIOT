@@ -1,21 +1,11 @@
 <!doctype html>
 <html>
    <body>
-   
       <h1>Yeldham Road</h1>
 	    <br>
-	    <h2>Outside: {{ temp_out }}&deg;C<br>Inside: {{ temp_in }}&deg;C </h2>
-	    <br>
-      <h2>How much are you spending&quest;</h2>
-      <p>Predicted monthly cost: &#163;{{ cost_month }} </p>
-      <p>Predicted daily cost: &#163;{{ cost_day }} </p>
-      <p>Current hourly cost: {{ cost_hour }}p </p>
-      <br>
-      <h3>Power Consumption: {{ power }}W </h3>
-      <br>
-	<svg width="200px" height="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	     x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
-	<g>
+	    <svg width="200px" height="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	    	x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+	    <g>
 		<path d="M54.319,37.839C54.762,35.918,55,33.96,55,32c0-9.095-4.631-17.377-12.389-22.153c-0.473-0.29-1.087-0.143-1.376,0.327
 			c-0.29,0.471-0.143,1.086,0.327,1.376C48.724,15.96,53,23.604,53,32c0,1.726-0.2,3.451-0.573,5.147C51.966,37.051,51.489,37,51,37
 			c-3.86,0-7,3.141-7,7s3.14,7,7,7s7-3.141,7-7C58,41.341,56.509,39.024,54.319,37.839z M51,49c-2.757,0-5-2.243-5-5s2.243-5,5-5
@@ -28,8 +18,16 @@
 			C23.142,11.874,25.825,14,29,14c3.86,0,7-3.141,7-7s-3.14-7-7-7c-3.851,0-6.985,3.127-6.999,6.975
 			C11.42,9.922,3.851,19.12,3.073,30.146C3.034,30.696,3.449,31.175,4,31.213z M29,2c2.757,0,5,2.243,5,5s-2.243,5-5,5s-5-2.243-5-5
 			S26.243,2,29,2z"/>
-	</g>
-	</svg>
-
+	    </g>
+	    </svg>
+	    <h2>Outside: {{ temp_out }}&deg;C<br>Inside: {{ temp_in }}&deg;C </h2>
+	    <br>
+      <h2>How much are you spending&quest;</h2>
+      <p>Predicted monthly cost: &#163;{{ cost_month }} </p>
+      <p>Predicted daily cost: &#163;{{ cost_day }} </p>
+      <p>Current hourly cost: {{ cost_hour }}p </p>
+      <br>
+      <h3>Power Consumption: {{ power }}W </h3>
+      <br>
    </body>
 </html>
