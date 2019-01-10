@@ -133,6 +133,7 @@ def get_dashboard():
 	<html><body><h1>Yeldham Road Dashboard: {:.2f}</h1></body></html>
 	'''.format(cost_month)
     except:
+	print "Unexpected error:", sys.exc_info()[0]
 	return jsonify({'error': 'Request failed'}), 503
 
 try:
