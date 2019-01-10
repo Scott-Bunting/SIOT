@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, redirect
 from time import sleep 
 from serial import Serial
 from functions import data_inside, data_outside, get_code 
