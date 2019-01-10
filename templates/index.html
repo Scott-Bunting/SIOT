@@ -1,7 +1,10 @@
 <!doctype html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
 <html>
    <body>
-      <h1>Yeldham Road</h1>
+      <h1 class="middle">Yeldham Road</h1>
 	    <br>
 	    <svg width="200px" height="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	    	x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
@@ -22,9 +25,9 @@
 	    </svg>
 	    <h2>Outside: {{ temp_out }}&deg;C<br>Inside: {{ temp_in }}&deg;C </h2>
 	    <br>
-      <h2>How much are you spending&quest;</h2>
+      <h2 class="middle">How much are you spending&quest;</h2>
       <p>Predicted monthly cost: &#163;{{ cost_month }} </p>
-      <p>Predicted daily cost: &#163;{{ cost_day }} </p>
+      <p class ="middle">Predicted daily cost: &#163;{{ cost_day }} </p>
       <p>Current hourly cost: {{ cost_hour }}p </p>
       <br>
       <h3>Power Consumption: {{ power }}W </h3>
