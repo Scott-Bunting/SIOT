@@ -61,12 +61,12 @@ body {
 	   <p class ="middle2">{{ power }}(W)</p>
 	   </div>
 	   <div class="rectangle">
-	   {& if power >= 2000 &}
+	   {% if power >= 2000 %}
 		   <p class="middle3">Warning! Your Energy Consumption is currently over 2kW.
 			   This is both bad for the environment and your wallet.
 			   Try turning your heating down and putting on a jumper.
 		   </p>
-	   {& endif &}
+	   {% endif %}
 	   </div>
    </body>
 </html>
