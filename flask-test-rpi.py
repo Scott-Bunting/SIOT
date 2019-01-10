@@ -116,40 +116,22 @@ def get_metrics():
 @app.route('/dashboard', methods=['GET'])
 def get_dashboard():
     global url
-    global u
-    global p
 
     try:
-        outside_r = requests.get(url+'/yeldham_outside')
-        data_out = outside_r.text
-        data_out = json.loads(data_out)
-    
-        inside_r = requests.get(url+'/yeldham_inside')
-        data_in = inside_r.text
-        data_in = json.loads(data_in)
+	metrics_r = requests.get(url+'/metrics')
+	data_met = metrics.text
+	data_met = json.loads(data_met)
 
-        delta_temp = float(data_in['temp_inside']) - float(data_out['temp_outside'])
-        power = int(delta_temp*u)
+        power = data_met['power']
+	cost_hour = data_met['hourly_cost']
+	cost_day = data_met['daily_cost']
+	cost_month = data_met['monthly_cost']
+	temp_in = data_met['temp_in']
+	temp_out = data_met['temp_out']
 
-        cost_hour = p*power/1000
-        cost_hour = round(cost_hour, 2)
-
-        cost_day = (cost_hour*24)/100 #In Sterling Pounds
-        cost_day = round(cost_day, 2)
-    
-        date = data_in['datetime']
-        if int(date[5:6]) == 0:
-            month = int(date[6])
-        else:
-            month = int(date[5:6])
-        year = int(date[0:3])
-        days = monthrange(year, month)
-        days = days[1]
-
-        cost_month = cost_day*days 
-        cost_month = round(cost_month, 2)
-
-        return '<html><body><h1>Yeldham Road Dashboard: {:.2f}</h1></body></html>'.format(cost_day)
+        return '''
+	<html><body><h1>Yeldham Road Dashboard: {:.2f}</h1></body></html>
+	'''.format(cost_month)
     except:
 	return jsonify({'error': 'Request failed'}), 503
 
