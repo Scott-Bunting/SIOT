@@ -120,9 +120,8 @@ def get_dashboard():
 
     try:
 	metrics_r = requests.get(url+'/metrics')
-	data_met = metrics.text
+	data_met = metrics_r.text
 	data_met = json.loads(data_met)
-	print('Data Imported')
 
         power = data_met['power']
 	cost_hour = data_met['hourly_cost']
@@ -130,7 +129,6 @@ def get_dashboard():
 	cost_month = data_met['monthly_cost']
 	temp_in = data_met['temp_in']
 	temp_out = data_met['temp_out']
-	print('Data Stored Locally')
 
         return '''
 	<html><body><h1>Yeldham Road Dashboard: {:.2f}</h1></body></html>
