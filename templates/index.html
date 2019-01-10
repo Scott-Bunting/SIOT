@@ -12,11 +12,18 @@ body {
     font-family: "Helvetica";
     font-weight: lighter;
     font-size: 150%;
+.rectangle {
+    display: block;
+    margin: auto;
+    height: 100px;
+    width: 200px;
+    background-color: #F5F5F5;
+}
 </style>
 <html>
    <body>
 	   <div class="ex1">
-      <h1 class="middle">Yeldham Road</h1>
+     <h1 class="middle">Yeldham Road</h1>
         <p class="middle">
 	    <svg  width="200px" height="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 	    	x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;display:block;margin:auto" xml:space="preserve">
@@ -48,9 +55,18 @@ body {
 	   <p class="middle2">&#163;{{ cost_day }}</p>
 	   <p class="middle">Current hourly cost</p>
 	   <p class="middle2">{{ cost_hour }}p </p>
-      <br>
-      <h2 class="middle">Power Consumption </h2>
+	   </div>
+	   <div>
+	   <h2 class="middle">Power Consumption </h2>
 	   <p class ="middle2">{{ power }}(W)</p>
+	   </div>
+	   <div class="rectangle">
+	   {& if power >= 2000 &}
+		   <p class="middle3">Warning! Your Energy Consumption is currently over 2kW.
+			   This is both bad for the environment and your wallet.
+			   Try turning your heating down and putting on a jumper.
+		   </p>
+	   {% endif %}
 	   </div>
    </body>
 </html>
