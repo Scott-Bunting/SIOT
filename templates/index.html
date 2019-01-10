@@ -39,17 +39,19 @@ body {
         </p>
 	   <h2 class="middle">Outside</h2>
 	   <p class="middle2"> {{ temp_out }}&deg;C </p>
-	   <br>
 	   <h2 class="middle">Inside</h2>
 	   <p class="middle2"> {{ temp_in }}&deg;C </p>
 	   <br>
       <h2 class="middle">How much are you spending&quest;</h2>
-      <p class="middle">Predicted monthly cost: &#163;{{ cost_month }} </p>
-      <p class ="middle">Predicted daily cost: &#163;{{ cost_day }} </p>
-      <p class="middle">Current hourly cost: {{ cost_hour }}p </p>
+	   <p class="middle">Predicted monthly cost</p>
+	   <p class="middle2">&#163;{{ cost_month }}</p>
+	   <p class="middle">Predicted daily cost</p>
+	   <p class="middle2">&#163;{{ cost_day }}</p>
+	   <p class="middle">Current hourly cost</p>
+	   <p class="middle2">{{ cost_hour }}p </p>
       <br>
-      <h2 class="middle">Power Consumption </h3>
-      <p class ="middle">
+      <h2 class="middle">Power Consumption </h2>
+	   <p class ="middle2">{{ power }}(W)</p>
       <br>
    </body>
 </html>
