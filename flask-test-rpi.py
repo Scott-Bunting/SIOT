@@ -131,7 +131,11 @@ def get_dashboard():
 	temp_out = data_met['temp_out']
 
         return '''
-	<html><body><h1>Yeldham Road Dashboard: {:.2f}</h1></body></html>
+	<html>
+	<body><h1>Yeldham Road Dashboard: {:.2f}</h1></body>
+	<br>
+	<p>This is a pararaph</p>
+	</html>
 	'''.format(cost_month)
     except:
 	print "Unexpected error:", sys.exc_info()[0]
