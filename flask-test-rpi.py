@@ -6,6 +6,7 @@ import bme680
 import requests
 from calendar import monthrange
 import json
+import sys
 
 #Api requirements
 api_key = '07bafc834660819c6b0c515fe2a9cac9'
