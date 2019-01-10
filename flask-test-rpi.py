@@ -129,22 +129,29 @@ def get_dashboard():
 	cost_month = data_met['monthly_cost']
 	temp_in = data_met['temp_in']
 	temp_out = data_met['temp_out']
-
-        return '''
-	<html>
-	<body><h1>Yeldham Road Dashboard</h1></body>
-	<br>
-	<h2>Outside: {:.1f}&deg;C<br>Inside: {:.1f}&deg;C </h2>
-	<br>
-	<h2>How much are you spending&quest;</h2>
-	<p>Predicted monthly cost: &#163;{:.2f} </p>
-	<p>Predicted daily cost: {:.2f}p </p>
-	<p>Current hourly cost: {:.2f}p </p>
-	<br>
-	<h3>Power Consumption: {:.0f}W </h3>
-	<br>
-	</html>
-	'''.format(temp_in, temp_out, cost_month, cost_day, cost_hour, power)
+	
+	return render_template('index.html',
+			       temp_out = temp_out,
+			       temp_in = temp_in,
+			       cost_month = cost_month,
+			       cost_day = cost_day,
+			       cost_hour = cost_hour,
+			       power = power)
+#         return '''
+# 	<html>
+# 	<body><h1>Yeldham Road Dashboard</h1></body>
+# 	<br>
+# 	<h2>Outside: {:.1f}&deg;C<br>Inside: {:.1f}&deg;C </h2>
+# 	<br>
+# 	<h2>How much are you spending&quest;</h2>
+# 	<p>Predicted monthly cost: &#163;{:.2f} </p>
+# 	<p>Predicted daily cost: {:.2f}p </p>
+# 	<p>Current hourly cost: {:.2f}p </p>
+# 	<br>
+# 	<h3>Power Consumption: {:.0f}W </h3>
+# 	<br>
+# 	</html>
+# 	'''.format(temp_in, temp_out, cost_month, cost_day, cost_hour, power)
     except:
 	print "Unexpected error:", sys.exc_info()[0]
 	return jsonify({'error': 'Request failed'}), 503
