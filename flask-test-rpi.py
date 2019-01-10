@@ -6,6 +6,7 @@ import bme680
 import requests
 from calendar import monthrange
 import json
+import sys
 
 #Api requirements
 api_key = '07bafc834660819c6b0c515fe2a9cac9'
@@ -113,7 +114,40 @@ def get_metrics():
     except:
 	return jsonify({'error': 'Request failed'}), 503
     
+@app.route('/dashboard', methods=['GET'])
+def get_dashboard():
+    global url
 
+    try:
+	metrics_r = requests.get(url+'/metrics')
+	data_met = metrics_r.text
+	data_met = json.loads(data_met)
+
+        power = data_met['power']
+	cost_hour = data_met['hourly_cost']
+	cost_day = data_met['daily_cost']
+	cost_month = data_met['monthly_cost']
+	temp_in = data_met['temp_in']
+	temp_out = data_met['temp_out']
+
+        return '''
+	<html>
+	<body><h1>Yeldham Road Dashboard</h1></body>
+	<br>
+	<h2>Outside: {:.1f}&deg;C<br>Inside: {:.1f}&deg;C </h2>
+	<br>
+	<h2>How much are you spending&quest;</h2>
+	<p>Predicted monthly cost: &#163;{:.2f} </p>
+	<p>Predicted daily cost: {:.2f}p </p>
+	<p>Current hourly cost: {:.2f}p </p>
+	<br>
+	<h3>Power Consumption: {:.0f}W </h3>
+	<br>
+	</html>
+	'''.format(temp_in, temp_out, cost_month, cost_day, cost_hour, power)
+    except:
+	print "Unexpected error:", sys.exc_info()[0]
+	return jsonify({'error': 'Request failed'}), 503
 
 try:
     app.run()
