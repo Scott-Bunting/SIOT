@@ -120,7 +120,7 @@ def get_metrics():
     global p
 
     try:
-	return '<html><body><h1>'Yeldham Road Dashboard'</h1></body></html>'
+	return('<html><body><h1>'Yeldham Road Dashboard'</h1></body></html>')
 #         outside_r = requests.get(url+'/yeldham_outside')
 #         data_out = outside_r.text
 #         data_out = json.loads(data_out)
