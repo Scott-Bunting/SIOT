@@ -140,9 +140,9 @@ def get_dashboard():
 	<br>
 	<p>Current hourly cost: {:.2f}p </p>
 	<br>
-	<p>Power Consumption: {:.2f}W </p>
+	<p>Power Consumption: {:.0f}W </p>
 	<br>
-	<p>Temperature Inside: {:.2f}&#2103; Temperature Outside: {:.2f}&#2103; </p>
+	<p>Temperature Inside: {:.1f}&#2103; Temperature Outside: {:.1f}&#2103; </p>
 	</html>
 	'''.format(cost_month, cost_day, cost_hour, power, temp_in, temp_out)
     except:
