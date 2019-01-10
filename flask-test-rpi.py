@@ -114,7 +114,7 @@ def get_metrics():
 	return jsonify({'error': 'Request failed'}), 503
     
 @app.route('/dashboard', methods=['GET'])
-def get_metrics():
+def get_dashboard():
     global url
     global u
     global p
